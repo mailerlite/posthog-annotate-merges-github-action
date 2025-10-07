@@ -23,9 +23,7 @@
   "dependencies": {
     "@actions/core": "^1.10.0",
     "@actions/github": "^5.1.1",
-    "node-fetch": "^3.3.0"
-  },
-  "devDependencies": {
+    "node-fetch": "^3.3.0",
     "@vercel/ncc": "^0.38.4",
     "vitest": "^1.0.0"
   }
