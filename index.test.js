@@ -39,7 +39,7 @@ describe('PostHog Annotation GitHub Action', () => {
         'posthog-token': 'test-token',
         'posthog-api-host': 'https://app.posthog.com',
         'annotation-message': 'Test annotation message',
-        'dashboard-item': '' // Empty string means not provided
+        'dashboard-id': '' // Empty string means not provided
       };
       return inputs[name] || '';
     });
@@ -71,7 +71,7 @@ describe('PostHog Annotation GitHub Action', () => {
     expect(requestBody.content).toBe('Test annotation message');
     expect(requestBody.creation_type).toBe('GIT');
     expect(requestBody.date_marker).toBeDefined();
-    expect(requestBody.dashboard_item).toBeUndefined();
+    expect(requestBody.dashboard_id).toBeUndefined();
   });
 
   it('should create a dashboard-item scoped annotation when dashboard-item is provided', async () => {
@@ -85,7 +85,7 @@ describe('PostHog Annotation GitHub Action', () => {
         'posthog-token': 'test-token',
         'posthog-api-host': 'https://app.posthog.com',
         'annotation-message': 'Dashboard annotation',
-        'dashboard-item': '67890'
+        'dashboard-id': '67890'
       };
       return inputs[name] || '';
     });
@@ -103,11 +103,11 @@ describe('PostHog Annotation GitHub Action', () => {
     const callArgs = mockFetch.mock.calls[mockFetch.mock.calls.length - 1];
     const requestBody = JSON.parse(callArgs[1].body);
     
-    expect(requestBody.scope).toBe('dashboard_item');
+    expect(requestBody.scope).toBe('dashboard');
     expect(requestBody.content).toBe('Dashboard annotation');
     expect(requestBody.creation_type).toBe('GIT');
     expect(requestBody.date_marker).toBeDefined();
-    expect(requestBody.dashboard_item).toBe(67890);
+    expect(requestBody.dashboard_id).toBe(67890);
   });
 
   it('should handle API errors gracefully', async () => {
@@ -121,7 +121,7 @@ describe('PostHog Annotation GitHub Action', () => {
         'posthog-token': 'test-token',
         'posthog-api-host': 'https://app.posthog.com',
         'annotation-message': 'Test annotation',
-        'dashboard-item': ''
+        'dashboard-id': ''
       };
       return inputs[name] || '';
     });
@@ -150,7 +150,7 @@ describe('PostHog Annotation GitHub Action', () => {
         'posthog-token': 'test-token',
         'posthog-api-host': 'https://custom.posthog.com',
         'annotation-message': 'Test annotation',
-        'dashboard-item': ''
+        'dashboard-id': ''
       };
       return inputs[name] || '';
     });

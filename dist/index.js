@@ -9875,18 +9875,18 @@ try {
   const posthogToken = (0,core.getInput)("posthog-token");
   const posthogAPIHost = (0,core.getInput)("posthog-api-host");
   const annotationMessage = (0,core.getInput)("annotation-message");
-  const dashboardItem = (0,core.getInput)("dashboard-item");
+  const dashboardId = (0,core.getInput)("dashboard-id");
 
   const body = {
     content: annotationMessage,
-    scope: dashboardItem ? "dashboard_item" : "project",
+    scope: dashboardId ? "dashboard" : "project",
     date_marker: new Date().toISOString(),
     creation_type: "GIT"
   };
-
-  // If dashboard_item is provided, add it to the body
-  if (dashboardItem) {
-    body.dashboard_item = parseInt(dashboardItem, 10);
+        
+  // If dashboard_id is provided, add it to the body
+  if (dashboardId) {
+    body.dashboard_id = parseInt(dashboardId, 10);
   }
 
   // API docs at https://posthog.com/docs/api/annotations#post-api-projects-project_id-annotations

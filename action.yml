@@ -14,8 +14,8 @@ inputs:
     annotation-message:
         description: 'the message to send as an annotation'
         required: true
-    dashboard-item:
-        description: 'Optional dashboard item ID to scope the annotation to a specific dashboard item'
+    dashboard-id:
+        description: 'Optional dashboard ID to scope the annotation to a specific dashboard'
         required: false
 runs:
     using: 'node20'
